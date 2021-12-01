@@ -1,0 +1,12 @@
+apiVersion: v2
+name: openshift-acm-minio
+description: A Helm chart for Kubernetes
+version: 0.0.5
+type: application
+#dependencies:
+#  - name: service-account
+#    version: 0.5.0
+#    repository: https://ibm-garage-cloud.github.io/toolkit-charts/
+#  - name: minio
+#    version: 5.0.33
+#    repository: https://charts.helm.sh/stable

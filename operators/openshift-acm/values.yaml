@@ -1,0 +1,6 @@
+rhacm:
+  enabled: true
+  config:
+    operatorGroupName: rhacm-operator-group
+    namespace: open-cluster-management
+    version: 2.2

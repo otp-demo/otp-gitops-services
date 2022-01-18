@@ -1,5 +1,11 @@
 apiVersion: operator.cert-manager.io/v1alpha1
 kind: CertManager
 metadata:
-  name: cert-manager-cntk
+  annotations:
+    operator-sdk/primary-resource: /cert-manager-webhook
+    operator-sdk/primary-resource-type: ValidatingWebhookConfiguration.admissionregistration.k8s.io
+  name: cert-manager
+  namespace: openshift-operators
+  finalizers:
+    - uninstall-helm-release
 spec: {}

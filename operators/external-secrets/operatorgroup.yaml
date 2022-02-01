@@ -2,5 +2,9 @@ apiVersion: operators.coreos.com/v1alpha2
 kind: OperatorGroup
 metadata:
   name: external-secrets
+  namespace: external-secrets
+labels:
+    app.kubernetes.io/instance: namespace-external-secrets
 spec:
-  targetNamespaces: []
+  targetNamespaces: 
+  - external-secrets

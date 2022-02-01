@@ -16231,11 +16231,11 @@ spec:
                   type: string
       served: true
       storage: true
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: cert-manager
+#---
+#apiVersion: v1
+#kind: Namespace
+#metadata:
+#  name: cert-manager
 ---
 # Source: cert-manager/templates/cainjector-serviceaccount.yaml
 apiVersion: v1

@@ -3,7 +3,7 @@ kind: OperatorGroup
 metadata:
   name: external-secrets
   namespace: external-secrets
-labels:
+  labels:
     app.kubernetes.io/instance: namespace-external-secrets
 spec:
   targetNamespaces: 

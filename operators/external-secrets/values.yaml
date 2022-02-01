@@ -63,7 +63,7 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
-resources: {}
+resources: 
    requests:
      cpu: 10m
      memory: 32Mi

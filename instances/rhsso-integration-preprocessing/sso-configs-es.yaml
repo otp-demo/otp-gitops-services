@@ -1,0 +1,68 @@
+apiVersion: external-secrets.io/v1alpha1
+kind: ExternalSecret
+metadata:
+  labels:
+    app.kubernetes.io/part-of: preprocessing-service
+  name: sso-configs
+  namespace: sso-integration
+spec:
+  data:
+  - remoteRef:
+      key: secret/rhsso
+      property: AWS_ACCESS_KEY_ID
+    secretKey: AWS_ACCESS_KEY_ID
+  - remoteRef:
+      key: secret/rhsso
+      property: AWS_SECRET_ACCESS_KEY
+    secretKey: AWS_SECRET_ACCESS_KEY
+  - remoteRef:
+      key: secret/rhsso
+      property: AWS_DEFAULT_REGION
+    secretKey: AWS_DEFAULT_REGION
+  - remoteRef:
+      key: secret/rhsso
+      property: ADMIN_CLIENT_ID
+    secretKey: ADMIN_CLIENT_ID
+  - remoteRef:
+      key: secret/rhsso
+      property: ADMIN_CLIENT_SECRET
+    secretKey: ADMIN_CLIENT_SECRET
+  - remoteRef:
+      key: secret/rhsso
+      property: ARGO_ADMIN_EMAIL
+    secretKey: ARGO_ADMIN_EMAIL
+  - remoteRef:
+      key: secret/rhsso
+      property: ARGO_ADMIN_FIRSTNAME
+    secretKey: ARGO_ADMIN_FIRSTNAME
+  - remoteRef:
+      key: secret/rhsso
+      property: ARGO_ADMIN_LASTNAME
+    secretKey: ARGO_ADMIN_LASTNAME
+  - remoteRef:
+      key: secret/rhsso
+      property: ARGO_ADMIN_PASSWORD
+    secretKey: ARGO_ADMIN_PASSWORD
+  - remoteRef:
+      key: secret/rhsso
+      property: ARGO_ADMIN_USERNAME
+    secretKey: ARGO_ADMIN_USERNAME
+  - remoteRef:
+      key: secret/rhsso
+      property: OPENSHIFT_BROKER_CLIENT_ID
+    secretKey: OPENSHIFT_BROKER_CLIENT_ID
+  - remoteRef:
+      key: secret/rhsso
+      property: OPENSHIFT_BROKER_CLIENT_SECRET
+    secretKey: OPENSHIFT_BROKER_CLIENT_SECRET
+  - remoteRef:
+      key: secret/rhsso
+      property: AZURE_X509_CERT
+    secretKey: AZURE_X509_CERT
+  refreshInterval: 15s
+  secretStoreRef:
+    kind: SecretStore
+    name: secretstore-vault
+  target:
+    creationPolicy: Owner
+    name: sso-configs

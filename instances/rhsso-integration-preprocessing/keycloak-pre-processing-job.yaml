@@ -9,5 +9,6 @@ spec:
       containers:
       - name: keycloak-preprocessing
         image: quay.io/leoliu2011/keycloak-preprocessing
+        imagePullPolicy: Always
       restartPolicy: Never
   backoffLimit: 5

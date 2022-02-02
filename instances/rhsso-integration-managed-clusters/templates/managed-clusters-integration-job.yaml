@@ -1,0 +1,27 @@
+{{- range .Values.clustersList }}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: "managed-clusters-keycloak-integration-{{ . }}"
+  namespace: sso-integration
+spec:
+  template:
+    spec:
+      containers:
+      - name: managed-clusters-keycloak-integration
+        image: quay.io/leoliu2011/cluster-keycloak-integration:v1
+        imagePullPolicy: Always
+        envFrom:
+        - configMapRef:
+            name: argocd-configs
+        - secretRef:
+            name: sso-configs
+        env:
+        - name: CLUSTER_CLIENT_ID
+          value: "{{ . }}"
+        - name: IS_MANAGED_CLUSTER
+          value: "true"
+      restartPolicy: Never
+  backoffLimit: 5
+{{- end }}

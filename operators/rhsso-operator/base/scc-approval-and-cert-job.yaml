@@ -17,6 +17,10 @@ spec:
             - /bin/bash
             - -c
             - |
+              # TODO: to review anyuid range
+              echo "Assign the anyuid scc for the postgres pod to be created successfully..."
+              oc adm policy add-scc-to-user anyuid -z default
+
               export HOME=/tmp/approver
 
               echo "Approving RH-SSO operator install.  Waiting a few seconds to make sure the InstallPlan gets created first."

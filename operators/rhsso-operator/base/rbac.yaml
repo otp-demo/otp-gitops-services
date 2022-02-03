@@ -67,7 +67,7 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: rhsso-cert-secret-creator
+  name: rhsso-cert-secret-scc-creator
 subjects:
   - kind: ServiceAccount
     name: rhsso-operator-job

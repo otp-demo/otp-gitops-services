@@ -15,3 +15,12 @@ The prerequisites to install the Instana agent are:
 1. Modify the `instana-agent.cluster.name` value in the `instances\instana-agent\values.yaml` file which represents the name that will be assigned to this cluster in Instana.
 
 1. Modify the `instana-agent.zone.name` value in the `instances\instana-agent\values.yaml` file which is the custom zone that detected technologies will be assigned to.
+
+## RHSSO integration
+The prerequisites to install the RHSSO related 
+1. There should be an vault setup, which will provides all the credentials for keycloak integration jobs
+
+2. Create a secret for vault, which is used to login the vault. Replace VAULT_TOKEN with token provided 
+`oc create secret generic vault-token --from-literal=token=${VAULT_TOKEN} -n sso-integration`
+
+3. Update the file `instances/rhsso-integration-preprocessing/secretstore.yaml` with proper `caBundle` value, and `server` path

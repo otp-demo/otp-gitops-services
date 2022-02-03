@@ -1,19 +1,19 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: argocd-keycloak-integration
+  name: cluster-keycloak-integration
   namespace: sso-integration
 spec:
   template:
     spec:
       containers:
-      - name: argocd-keycloak-integration
-        image: quay.io/leoliu2011/argocd-keycloak-integration
+      - name: cluster-keycloak-integration
+        image: quay.io/leoliu2011/cluster-keycloak-integration:v1
+        imagePullPolicy: Always
         envFrom:
         - configMapRef:
             name: argocd-configs
         - secretRef:
             name: sso-configs
-        imagePullPolicy: Always
       restartPolicy: Never
   backoffLimit: 5

@@ -1,14 +1,14 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: argocd-keycloak-integration
+  name: azure-keycloak-integration
   namespace: sso-integration
 spec:
   template:
     spec:
       containers:
-      - name: argocd-keycloak-integration
-        image: quay.io/leoliu2011/argocd-keycloak-integration
+      - name: azure-keycloak-integration
+        image: quay.io/mahesh_v/azure-keycloak-integration:v1
         envFrom:
         - configMapRef:
             name: argocd-configs

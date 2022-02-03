@@ -3,6 +3,4 @@ kind: Kustomization
 
 resources:
   - rbac.yaml
-  - secretstore.yaml
-  - sso-configs-es.yaml
-  - keycloak-pre-processing-job.yaml
+  - hub-integration-job.yaml

@@ -2,7 +2,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: sso-integration
-  namespace: sso
+  namespace: openshift-authentication
 rules:
   - apiGroups:
       - "route.openshift.io"
@@ -10,18 +10,13 @@ rules:
       - routes
     verbs:
       - get
-  - apiGroups:
-      - ""
-    resources:
-      - secrets
-    verbs:
-      - get
+      - list
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: sso-integration
-  namespace: sso
+  namespace: openshift-authentication
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
@@ -35,57 +30,26 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: sso-integration
-  namespace: sso-integration
+  namespace: openshift-config
 rules:
-  - apiGroups:
-      - ""
-    resources:
-      - configmaps
-    verbs:
-      - get
-      - patch
-      - list
-      - create
   - apiGroups:
       - ""
     resources:
       - secrets
     verbs:
-      - get
-      - patch
-      - list
-      - create
-  - apiGroups:
-      - "external-secrets.io"
-    resources:
-      - secretstores
-    verbs:
-      - get
-      - patch
-      - list
-      - create
       - delete
-  - apiGroups:
-      - "external-secrets.io"
-    resources:
-      - externalsecrets
-    verbs:
-      - get
-      - patch
-      - list
       - create
-      - delete
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: sso-integration
-  namespace: sso-integration
+  namespace: openshift-config
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
   name: sso-integration
 subjects:
   - kind: ServiceAccount
-    name: openshift-gitops-cntk-argocd-application-controller
-    namespace: openshift-gitops
+    name: default
+    namespace: sso-integration

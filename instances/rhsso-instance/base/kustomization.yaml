@@ -5,4 +5,5 @@ namespace: sso
 
 resources:
   - sso.yaml
+  - keycloak-postgresql-deployment.yaml
   - rbac.yaml

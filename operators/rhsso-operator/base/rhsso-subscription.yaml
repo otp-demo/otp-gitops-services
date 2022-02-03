@@ -3,7 +3,7 @@ kind: Subscription
 metadata:
   name: rhsso-operator
 spec:
-  channel: stable
+  channel: alpha
   installPlanApproval: Manual
   name: rhsso-operator
   source: redhat-operators

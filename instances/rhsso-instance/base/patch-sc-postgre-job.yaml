@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: installplan-approver
+  name: patch-sc-postgre
   namespace: sso
 spec:
   template:
@@ -25,9 +25,9 @@ spec:
               done
 
               echo "--- Deployment keycloak-postgresql found. Patch with security context ---"
-              oc patch -n sso deployment/keycloak-postgresql -p '{"spec": {"template": {"spec": {"securityContext": {"runAsUser": 1000, "runAsNonRoot": true, "fsGroup": 2000}}}}}'
+              oc patch -n ${NAMESPACE} deployment/keycloak-postgresql -p '{"spec": {"template": {"spec": {"securityContext": {"runAsUser": 1000, "runAsNonRoot": true, "fsGroup": 2000}}}}}'
           imagePullPolicy: Always
-          name: installplan-approver-and-cert-secret
+          name: patch-sc-postgre
       dnsPolicy: ClusterFirst
       restartPolicy: OnFailure
       serviceAccount: rhsso-operator-job

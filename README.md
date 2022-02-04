@@ -24,3 +24,34 @@ The prerequisites to install the RHSSO related
 `oc create secret generic vault-token --from-literal=token=${VAULT_TOKEN} -n sso-integration`
 
 3. Update the file `instances/rhsso-integration-preprocessing/secretstore.yaml` with proper `caBundle` value, and `server` path
+
+
+### RHSSO Operator and instance issues running on IBM Cloud
+#### RHSSO Operator
+ There is SCC user range restriction, which caused the following error when standing up the operator
+```bash
+Error creating: pods "keycloak-postgresql-6d46dbdb6b-" is forbidden: unable to validate against any security context constraint: [provider "anyuid": Forbidden: not usable by user or serviceaccount, provider "pipelines-scc": Forbidden: not usable by user or serviceaccount, provider "containerized-data-importer": Forbidden: not usable by user or serviceaccount, spec.initContainers[0].securityContext.runAsUser: Invalid value: 0: must be in the ranges: [1000800000, 1000809999], provider "ibm-restricted-scc": Forbidden: not usable by user or serviceaccount, provider "nonroot": Forbidden: not usable by user or serviceaccount, provider "noobaa": Forbidden: not usable by user or serviceaccount, provider "noobaa-endpoint": Forbidden: not usable by user or serviceaccount, provider "ibm-anyuid-scc": Forbidden: not usable by user or serviceaccount, provider "hostmount-anyuid": Forbidden: not usable by user or serviceaccount, provider "ibm-anyuid-hostpath-scc": Forbidden: not usable by user or serviceaccount, provider "bridge-marker": Forbidden: not usable by user or serviceaccount, provider "machine-api-termination-handler": Forbidden: not usable by user or serviceaccount, provider "kubevirt-controller": Forbidden: not usable by user or serviceaccount, provider "hostnetwork": Forbidden: not usable by user or serviceaccount, provider "hostaccess": Forbidden: not usable by user or serviceaccount, provider "ibm-anyuid-hostaccess-scc": Forbidden: not usable by user or serviceaccount, provider "linux-bridge": Forbidden: not usable by user or serviceaccount, provider "nmstate": Forbidden: not usable by user or 
+```
+
+To fix this: `oc adm policy add-scc-to-user anyuid system:serviceaccount:sso:default`
+
+If the rhsso operator gitops runs a second time (delete the rhsso operator application and argocd spin up the operator again), you might see
+```bash
+clusterserviceversion exists and is not referenced by a subscription
+``` 
+This seems to be a bug with the version of csv and subscription not matching well.
+
+To fix this, run `oc delete csv rhsso-operator.7.5.1-opr-005 -n sso`, and then delete the rhsso operator again. 
+
+#### RHSSO instance
+if error occurs on `keycloak-postgresql` pod 
+```bash
+mkdir cannot create directory permission denied
+```
+Patch the deployment `keycloak-postgresql` 
+```bash
+oc patch -n ${NAMESPACE} deployment/keycloak-postgresql -p '{"spec": {"template": {"spec": {"securityContext": {"runAsUser": 1000, "runAsNonRoot": true, "fsGroup": 2000}}}}}'
+```
+And wait for the deployment to kill and restart the pod, and operator will fix the rest of stuff
+
+This has been automated in `otp-gitops-services/instances/rhsso-instance/base/patch-sc-postgre-job.yaml`

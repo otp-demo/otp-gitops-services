@@ -2,6 +2,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: keycloak
+  namespace: sso
 rules:
   - apiGroups:
       - keycloak.org
@@ -27,3 +28,32 @@ subjects:
   - kind: ServiceAccount
     name: openshift-gitops-cntk-argocd-application-controller
     namespace: openshift-gitops
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: patch-role
+  namespace: sso
+rules:
+  - apiGroups:
+      - apps
+    resources:
+      - deployments
+    verbs:
+      - get
+      - list
+      - patch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: patch-role
+  namespace: sso
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: patch-role
+subjects:
+  - kind: ServiceAccount
+    name: rhsso-operator-job
+    namespace: sso

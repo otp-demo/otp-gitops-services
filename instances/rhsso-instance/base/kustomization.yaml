@@ -5,4 +5,5 @@ namespace: sso
 
 resources:
   - sso.yaml
+  - patch-sc-postgre-job.yaml
   - rbac.yaml

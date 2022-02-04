@@ -1,0 +1,35 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: installplan-approver
+  namespace: sso
+spec:
+  template:
+    spec:
+      containers:
+        - image: registry.redhat.io/openshift4/ose-cli:v4.4
+          env:
+            - name: NAMESPACE
+              value: "sso"
+          command:
+            - /bin/bash
+            - -c
+            - |
+              echo "--- Wait for deployment keycloak-postgresql to be ready ---"
+              oc get deployment keycloak-postgresql -n ${NAMESPACE}
+              while [[ $? -ne 0 ]]
+              do
+                sleep 3
+                echo "Wait for deployment keycloak-postgresql to be ready..."
+                oc get deployment keycloak-postgresql -n ${NAMESPACE}
+              done
+
+              echo "--- Deployment keycloak-postgresql found. Patch with security context ---"
+              oc patch -n sso deployment/keycloak-postgresql -p '{"spec": {"template": {"spec": {"securityContext": {"runAsUser": 1000, "runAsNonRoot": true, "fsGroup": 2000}}}}}'
+          imagePullPolicy: Always
+          name: installplan-approver-and-cert-secret
+      dnsPolicy: ClusterFirst
+      restartPolicy: OnFailure
+      serviceAccount: rhsso-operator-job
+      serviceAccountName: rhsso-operator-job
+      terminationGracePeriodSeconds: 30

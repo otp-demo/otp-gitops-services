@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ansible-keycloak-integration
+  namespace: sso-integration
+spec:
+  template:
+    spec:
+      containers:
+      - name: ansible-keycloak-integration
+        image: quay.io/mahesh_v/ansible-keycloak-integration:v1
+        envFrom:
+        - configMapRef:
+            name: argocd-configs
+        - secretRef:
+            name: sso-configs
+        imagePullPolicy: Always
+      restartPolicy: Never
+  backoffLimit: 5

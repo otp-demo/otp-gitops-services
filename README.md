@@ -55,3 +55,6 @@ oc patch -n ${NAMESPACE} deployment/keycloak-postgresql -p '{"spec": {"template"
 And wait for the deployment to kill and restart the pod, and operator will fix the rest of stuff
 
 This has been automated in `otp-gitops-services/instances/rhsso-instance/base/patch-sc-postgre-job.yaml`
+
+
+#### RHSSO integration on IBM cloud

@@ -26,6 +26,23 @@ The prerequisites to install the RHSSO related
 3. Update the file `instances/rhsso-integration-preprocessing/secretstore.yaml` with proper `caBundle` value, and `server` path
 
 
+### RHSSO integration on IBM cloud
+IBM Cloud App ID vs IBMid
+![](IBMidvsAppID.png)
+
+
+
+
+
+*Reference*
+- [Enabling authentication from an external identity provider
+](https://cloud.ibm.com/docs/account?topic=account-idp-integration)
+
+- [IBM Cloud SAML Federation Guide
+](https://cloud.ibm.com/docs/account?topic=account-idp-integration)
+
+- [High level steps](https://www.ibm.com/cloud/blog/announcements/ibm-cloud-self-service-federation-for-external-identity-providers)
+
 ### RHSSO Operator and instance issues running on IBM Cloud
 #### RHSSO Operator
  There is SCC user range restriction, which caused the following error when standing up the operator
@@ -55,6 +72,3 @@ oc patch -n ${NAMESPACE} deployment/keycloak-postgresql -p '{"spec": {"template"
 And wait for the deployment to kill and restart the pod, and operator will fix the rest of stuff
 
 This has been automated in `otp-gitops-services/instances/rhsso-instance/base/patch-sc-postgre-job.yaml`
-
-
-#### RHSSO integration on IBM cloud

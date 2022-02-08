@@ -71,6 +71,10 @@ spec:
       key: rhsso/integration
       property: CA_CERT_BUNDLE
     secretKey: CA_CERT_BUNDLE
+  - remoteRef:
+      key: rhsso/integration
+      property: ANSIBLE_X509_CERTs
+    secretKey: ANSIBLE_X509_CERTs
   refreshInterval: 15s
   secretStoreRef:
     kind: SecretStore

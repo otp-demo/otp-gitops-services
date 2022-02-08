@@ -69,12 +69,12 @@ spec:
     secretKey: ANSIBLE_KEY_PRIVATE_KEY
   - remoteRef:
       key: rhsso/integration
-      property: CA_CERT_BUNDLE
-    secretKey: CA_CERT_BUNDLE
+      property: ANSIBLE_X509_CERT
+    secretKey: ANSIBLE_X509_CERT
   - remoteRef:
       key: rhsso/integration
-      property: ANSIBLE_X509_CERTs
-    secretKey: ANSIBLE_X509_CERTs
+      property: CA_CERT_BUNDLE
+    secretKey: CA_CERT_BUNDLE
   refreshInterval: 15s
   secretStoreRef:
     kind: SecretStore

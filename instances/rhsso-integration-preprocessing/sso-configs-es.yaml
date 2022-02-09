@@ -75,6 +75,10 @@ spec:
       key: rhsso/integration
       property: CA_CERT_BUNDLE
     secretKey: CA_CERT_BUNDLE
+  - remoteRef:
+      key: rhsso/integration
+      property: KEYCLOAK_REALM
+    secretKey: KEYCLOAK_REALM
   refreshInterval: 15s
   secretStoreRef:
     kind: SecretStore

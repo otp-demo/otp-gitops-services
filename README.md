@@ -41,6 +41,8 @@ IBM Cloud App ID vs IBMid
 - [IBM Cloud SAML Federation Guide
 ](https://cloud.ibm.com/docs/account?topic=account-idp-integration)
 
+- [IBMid Federation Guide](https://ibm.ent.box.com/notes/78040808400?v=IBMid-Federation-Guide)
+
 - [High level steps](https://www.ibm.com/cloud/blog/announcements/ibm-cloud-self-service-federation-for-external-identity-providers)
 
 ### RHSSO Operator and instance issues running on IBM Cloud

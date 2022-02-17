@@ -29,6 +29,7 @@ The prerequisites to install the RHSSO related integration jobs
 
 5. Add a KV engine in the provided vault (Step 1) with path `rhsso/integration` like following image. All key-value paris are *REQUIRED* and explained in [rhsso-auto Integration with RHSSO Environment Variables](https://github.com/otp-demo/rhsso-auto#integration-with-rhsso-environment-variables) section under column `Location: sso-configs`. 
 ![rhsso-vault-key-value-example.png](rhsso-vault-key-value-example.png)
+Note: For all values under column `Location` with value `argocd-configs`, they are automatically populated by the [pre-processing job](instances/rhsso-integration-preprocessing/keycloak-pre-processing-job.yaml) as a configmap in Openshift environment.
 
 ### RHSSO Operator and instance issues running on IBM Cloud
 #### RHSSO Operator

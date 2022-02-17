@@ -27,25 +27,8 @@ The prerequisites to install the RHSSO related integration jobs
 
 4. (Optional) Update the file `instances/rhsso-integration-preprocessing/kustomization.yaml` with proper `caBundle` value, and `server` path to the target vault if necessary. (The default is used)
 
-
-### RHSSO integration on IBM cloud
-IBM Cloud App ID vs IBMid
-![](IBMidvsAppID.png)
-
-
-
-
-
-*Reference*
-- [Enabling authentication from an external identity provider
-](https://cloud.ibm.com/docs/account?topic=account-idp-integration)
-
-- [IBM Cloud SAML Federation Guide
-](https://cloud.ibm.com/docs/account?topic=account-idp-integration)
-
-- [IBMid Federation Guide](https://ibm.ent.box.com/notes/78040808400?v=IBMid-Federation-Guide)
-
-- [High level steps](https://www.ibm.com/cloud/blog/announcements/ibm-cloud-self-service-federation-for-external-identity-providers)
+5. Add a KV engine in the provided vault (Step 1) with path `rhsso/integration` like following image. All key-value paris are *REQUIRED* and explained in [rhsso-auto Integration with RHSSO Environment Variables](https://github.com/otp-demo/rhsso-auto#integration-with-rhsso-environment-variables) section under column `Location: sso-configs`. 
+![rhsso-vault-key-value-example.png](rhsso-vault-key-value-example.png)
 
 ### RHSSO Operator and instance issues running on IBM Cloud
 #### RHSSO Operator
